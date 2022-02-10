@@ -12,6 +12,10 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddSingleton(registeredServices =>
             registeredServices.GetRequiredService<IOptions<AppSettings>>().Value);
 
+        services.Configure<MoreSettings>(configuration.GetSection("MoreSettings"));
+        services.AddSingleton(registeredServices =>
+            registeredServices.GetRequiredService<IOptions<MoreSettings>>().Value);
+
         services.AddHostedService<Worker>();
     })
     .Build();
